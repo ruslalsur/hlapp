@@ -1,0 +1,7 @@
+[rusla@alsur hlapp]$ vagrant ssh
+[vagrant@manjaro-x64 ~]$ mkdir -p ~/dev/hlapp
+[vagrant@manjaro-x64 ~]$ cd ~/dev/hlapp/servers_up && ls && sh ./run.sh
+
+// см. run_sh.log
+
+[vagrant@manjaro-x64 ~]$ 
