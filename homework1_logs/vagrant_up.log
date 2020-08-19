@@ -13,10 +13,10 @@
     default: SSH address: 127.0.0.1:2222
     default: SSH username: vagrant
     default: SSH auth method: private key
-    default: 
+    default:
     default: Vagrant insecure key detected. Vagrant will automatically replace
     default: this with a newly generated keypair for better security.
-    default: 
+    default:
     default: Inserting generated public key within guest...
     default: Removing insecure key from the guest if it's present...
     default: Key inserted! Disconnecting and reconnecting using new SSH key...
@@ -24,31 +24,33 @@
 ==> default: Checking for guest additions in VM...
 ==> default: Mounting shared folders...
     default: /vagrant => /home/rusla/hlapp
-    
+
 // перетаскивание каталогов с конфигурационными файлами, которые я обычно использую на хосте
 // в виртуальную машину смысл использование которой потерян если вы не используете на хосте ос для домокозявок
 // но преподаватель настоял на ее использовании для накопления опыта по виртуализации
+// потом прочитал про синхронизацию, но решил оставить и этот вариант тоже для примера
 [rusla@alsur hlapp]$ vagrant global-status
-id       name      provider   state    directory                           
+id       name      provider   state    directory
 ---------------------------------------------------------------------------
-10c0d8a  homestead virtualbox poweroff /home/rusla/.homestead              
-2c7911b  default   virtualbox running  /home/rusla/dev/hlapp   
+10c0d8a  homestead virtualbox poweroff /home/rusla/.homestead
+2c7911b  default   virtualbox running  /home/rusla/dev/hlapp
 
 [rusla@alsur hlapp]$ ls
 servers_up  Vagrantfile
 
 [rusla@alsur hlapp]$ vagrant scp servers_up 2c7911b:/home/vagrant/dev/hlapp
 Warning: Permanently added '[127.0.0.1]:2222' (ECDSA) to the list of known hosts.
-run.sh                                                                                                                                                                                                      100%  996   515.6KB/s   00:00    
-createdb.sql                                                                                                                                                                                                100%  221   435.0KB/s   00:00    
-xdebug.ini                                                                                                                                                                                                  100%  433     1.1MB/s   00:00    
-php_local.ini                                                                                                                                                                                               100%  734     1.8MB/s   00:00    
-pma.conf                                                                                                                                                                                                    100%  225   598.3KB/s   00:00    
-app1.lo.conf                                                                                                                                                                                                100%  267   746.1KB/s   00:00    
-common.conf                                                                                                                                                                                                 100%   54   156.2KB/s   00:00    
-php_fpm.conf                                                                                                                                                                                                100%  445     1.2MB/s   00:00    
-unified_entry_point.conf                                                                                                                                                                                    100%   69   204.8KB/s   00:00    
+run.sh                                                                                                                                                                                                      100%  996   515.6KB/s   00:00
+createdb.sql                                                                                                                                                                                                100%  221   435.0KB/s   00:00
+xdebug.ini                                                                                                                                                                                                  100%  433     1.1MB/s   00:00
+php_local.ini                                                                                                                                                                                               100%  734     1.8MB/s   00:00
+pma.conf                                                                                                                                                                                                    100%  225   598.3KB/s   00:00
+app1.lo.conf                                                                                                                                                                                                100%  267   746.1KB/s   00:00
+common.conf                                                                                                                                                                                                 100%   54   156.2KB/s   00:00
+php_fpm.conf                                                                                                                                                                                                100%  445     1.2MB/s   00:00
+unified_entry_point.conf                                                                                                                                                                                    100%   69   204.8KB/s   00:00
 nginx.conf
 
-[rusla@alsur hlapp]$ vagrant ssh // см. vagrant_ssh.log        
-                                                                        
+[rusla@alsur hlapp]$ vagrant ssh // см. vagrant_ssh.log
+
+[rusla@alsur hlapp]$ vagrant rsync-auto // запуск автосинхронизации каталогов для беззаботной разработки
