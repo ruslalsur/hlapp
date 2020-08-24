@@ -12,7 +12,10 @@ ini_set('display_errors',1);
 define("DEBUG", true);
 
 if (DEBUG) {
-// создание экземпляра класса
+    // вклюение опциональной трассировки
+    ini_set('xdebug.auto_trace','On');
+
+    // создание экземпляра класса
     $log = new Logger('log');
     $log->pushHandler(new StreamHandler('../log/warning.log', Logger::WARNING));
     $log->pushHandler(new StreamHandler('../log/debug.log', Logger::DEBUG));
@@ -26,6 +29,8 @@ if (DEBUG) {
     // начало замера использования времени и памяти
     $start = microtime(true);
     $memory1 = memory_get_usage();
+} else {
+    ini_set('xdebug.auto_trace','Off');
 }
 
 // тянем время создавая иллюзию бурной деятельности
@@ -54,4 +59,5 @@ if (DEBUG) {
     $log->debug('Изменения в использовании памяти: ' . $memory_diff . ' байтов');
 
     echo 'Информация по логированию содержится в каталоге ../log';
+    echo 'Информация по трассировке содержится в каталоге ../log.traces';
 }
