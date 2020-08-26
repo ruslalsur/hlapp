@@ -2,14 +2,10 @@
 
 <?php
 require_once('../vendor/autoload.php');
+require_once('../config/config.php');
 
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
-
-error_reporting(E_ALL);
-ini_set('display_errors',1);
-
-define("DEBUG", true);
 
 if (DEBUG) {
     // вклюение опциональной трассировки
