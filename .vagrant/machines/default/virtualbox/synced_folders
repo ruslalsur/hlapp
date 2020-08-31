@@ -1,1 +1,0 @@
-{"rsync":{"/home/vagrant/dev/app":{"type":"rsync","SharedFoldersEnableSymlinksCreate":false,"rsync__auto":true,"rsync__exclude":[".idea/"],"guestpath":"/home/vagrant/dev/app","hostpath":"/home/rusla/dev/hlapp","disabled":false,"__vagrantfile":true,"auto":true,"exclude":[".idea/"],"owner":"vagrant","group":"vagrant"}},"virtualbox":{}}
