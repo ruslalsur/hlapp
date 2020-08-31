@@ -1,0 +1,102 @@
+[rusla@alsur hlapp]$ vagrant ssh master
+Welcome to Ubuntu 20.04.1 LTS (GNU/Linux 5.4.0-42-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Sun 30 Aug 2020 06:03:26 PM UTC
+
+  System load:  0.03              Processes:             104
+  Usage of /:   2.6% of 61.31GB   Users logged in:       0
+  Memory usage: 13%               IPv4 address for eth0: 10.0.2.15
+  Swap usage:   0%                IPv4 address for eth1: 10.0.0.10
+
+
+0 updates can be installed immediately.
+0 of these updates are security updates.
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+
+This system is built by the Bento project by Chef Software
+More information can be found at https://github.com/chef/bento
+Last login: Sun Aug 30 17:57:16 2020 from 10.0.2.2
+
+vagrant@master:~$ sudo apt install mariadb-server -y
+vagrant@master:~$ sudo systemctl status mariadb
+● mariadb.service - MariaDB 10.3.22 database server
+     Loaded: loaded (/lib/systemd/system/mariadb.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sun 2020-08-30 18:09:06 UTC; 43s ago
+       Docs: man:mysqld(8)
+             https://mariadb.com/kb/en/library/systemd/
+   Main PID: 2379 (mysqld)
+     Status: "Taking your SQL requests now..."
+      Tasks: 31 (limit: 1074)
+     Memory: 65.9M
+     CGroup: /system.slice/mariadb.service
+             └─2379 /usr/sbin/mysqld
+
+sudo vim /etc/mysql/my.cnf
+   содержимое файлов конфигурация находится в папке дз в файлах
+   master_my.cnf
+   slave_my.cnf
+
+sudo systemctl restart mariadb
+
+sudo mysql -uroot -proot < dev/app/src/db.sql
+sudo mysql -uroot -proot skytech < dev/app/src/explain_models.sql
+sudo mysql -uroot -proot skytech < dev/app/src/explain_models_patch_1.sql
+sudo mysql -uroot -proot skytech < dev/app/src/explain_models_patch_2.sql
+
+vagrant@master:~$ sudo mysql -uroot -proot
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 54
+Server version: 10.3.22-MariaDB-1ubuntu1 Ubuntu 20.04
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> USE skytech;
+Database changed
+
+MariaDB [skytech]> CREATE USER 'skytech_user'@'%' IDENTIFIED BY '123';
+Query OK, 0 rows affected (0.001 sec)
+
+MariaDB [skytech]> GRANT ALL PRIVILEGES ON skytech.* to 'skytech_user'@'%';
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [skytech]> GRANT REPLICATION SLAVE ON *.* TO 'skytech_user'@'%' IDENTIFIED BY '123';
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [skytech]> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.001 sec)
+
+MariaDB [skytech]> FLUSH TABLES WITH READ LOCK;
+Query OK, 0 rows affected (0.001 sec)
+
+MariaDB [skytech]> SHOW MASTER STATUS;
++------------------+----------+--------------+------------------+
+| File             | Position | Binlog_Do_DB | Binlog_Ignore_DB |
++------------------+----------+--------------+------------------+
+| mysql-bin.000001 |      642 | skytech      |                  |
++------------------+----------+--------------+------------------+
+1 row in set (0.000 sec)
+
+1 row in set (0.000 sec)
+
+MariaDB [skytech]> exit
+Bye
+
+vagrant@master:~$ sudo mysqldump -uroot skytech > /home/vagrant/dev/app/dump/master.sql
+vagrant@master:~$ scp dev/app/dump/master.sql vagrant@10.0.0.20:dev/app/dump/master.sql
+
+vagrant@master:~$ sudo mysql -uroot -proot
+MariaDB [(none)]> USE skytech;
+Database changed
+
+MariaDB [skytech]> UNLOCK TABLES;
+Query OK, 0 rows affected (0.000 sec)
