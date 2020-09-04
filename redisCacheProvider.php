@@ -16,12 +16,12 @@ class redisCacheProvider
 
     public function get($key)
     {
-        return $this->connection->get($key);
+        return unserialize($this->connection->get($key));
     }
 
     public function set($key, $value, $time = 0)
     {
-        $this->connection->set($key, $time);
+        $this->connection->set($key, serialize($value), $time);
     }
 
     public function del($key)
