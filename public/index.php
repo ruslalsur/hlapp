@@ -31,6 +31,8 @@ if (!$data) {
     while($row = mysqli_fetch_assoc($result)) $data[] = $row;
     mysqli_close($connection);
 
+    $cache->set('Diane', $data);
+
     $db_time = time() - $db_time1;
     echo $db_time;
 }
