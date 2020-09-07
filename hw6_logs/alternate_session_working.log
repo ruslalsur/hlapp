@@ -1,0 +1,5 @@
+# сервер memcached установил на двух vm
+
+#настройки php.ini для предотвращения хранения сессий в файлах
+session.save_handler = memcache
+session.save_path = "tcp://10.0.0.20:11211 tcp://10.0.0.30:11211"
