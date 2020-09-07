@@ -1,8 +1,8 @@
 ~/dev/hlapp.local >>> vagrant ssh server2                                                             ±[●●●][hw6]
 Welcome to Ubuntu 20.04.1 LTS (GNU/Linux 5.4.0-42-generic x86_64)
 
-vagrant@balancer:~$ sudo vim /etc/nginx/conf.d/app.local.conf
-vagrant@balancer:~$ cat /etc/nginx/conf.d/app.local.conf
+vagrant@server2:~$ sudo vim /etc/nginx/conf.d/app.local.conf
+vagrant@server2:~$ cat /etc/nginx/conf.d/app.local.conf
 server {
   listen 8080;
   listen [::]:8080;
@@ -37,4 +37,4 @@ server {
 }
 
 
-vagrant@balancer:~$ sudo systemctl restart nginx
+vagrant@server2:~$ sudo systemctl restart nginx
