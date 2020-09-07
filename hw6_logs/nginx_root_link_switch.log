@@ -1,0 +1,20 @@
+~/dev/hlapp.local >>> vagrant ssh balancer                                                             ±[●●●][hw6]
+Welcome to Ubuntu 20.04.1 LTS (GNU/Linux 5.4.0-42-generic x86_64)
+
+vagrant@balancer:~$ cat /etc/nginx/conf.d/app.local.conf
+server {
+  listen 80;
+  listen [::]:80;
+  server_name   www.balancer balancer;
+  root /home/vagrant/dev/app/public;
+  index index.php index.html index.htm index.nginx-debian.html;
+
+  location / {
+    proxy_pass http://balancer;
+    try_files $uri $uri/ /index.php;
+  }
+
+  # переключения зеркал путем изменеий ссылки в каталоге /home/vagrant/dev/app
+  # на распололожение зеркала
+  vagrant@balancer:~$ ln -s ~/dev/mirror1 /home/vagrant/dev/app
+  vagrant@balancer:~$ ln -s ~/dev/mirror2 /home/vagrant/dev/app
