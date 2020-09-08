@@ -11,7 +11,7 @@
 пример кода находится в public/index.php
 
 
-еще вот тпкжн решил посмотреть на вывод siege -b -c10 -t60S localhost если сервера,
+еще вот решил посмотреть на вывод siege -b -c10 -t60S localhost если сервера,
 которые дожны учавствовать в схеме балансировки, включать по-очереди:
 
 
@@ -54,7 +54,7 @@ Longest transaction:	        3.07
 Shortest transaction:	        0.00
 
 
-а это вывод siege с запушеным балансировшиком и server1 и server2
+это вывод siege с запушеным балансировшиком и server1 и server2
 ** SIEGE 4.0.4
 ** Preparing 10 concurrent users for battle.
 The server is now under siege...
@@ -73,4 +73,5 @@ Longest transaction:	        0.02
 Shortest transaction:	        0.00
 
 
-как видно из вывода один блансировшик, без серверов не работает
+как видно из вывода один блансировшик, без хотя бы одного сервероа,
+описанного в схеме балансировки, не работает
