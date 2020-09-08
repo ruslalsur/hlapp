@@ -9,3 +9,68 @@
 Ответ от server2.local, время отправки: 1599512105
 
 пример кода находится в public/index.php
+
+
+еще вот тпкжн решил посмотреть на вывод siege -b -c10 -t60S localhost если сервера,
+которые дожны учавствовать в схеме балансировки, включать по-очереди:
+
+
+это вывод siege с запушеным только балансировшиком balancer
+** SIEGE 4.0.4
+** Preparing 10 concurrent users for battle.
+The server is now under siege...siege aborted due to excessive socket failure; you
+can change the failure threshold in $HOME/.siegerc
+
+Transactions:		           0 hits
+Availability:		        0.00 %
+Elapsed time:		       21.43 secs
+Data transferred:	        0.16 MB
+Response time:		        0.00 secs
+Transaction rate:	        0.00 trans/sec
+Throughput:		        0.01 MB/sec
+Concurrency:		        9.33
+Successful transactions:           0
+Failed transactions:	        1033
+Longest transaction:	       21.43
+Shortest transaction:	        0.00
+
+
+это вывод siege с запушеным только балансировшиком server1
+** SIEGE 4.0.4
+** Preparing 10 concurrent users for battle.
+The server is now under siege...
+Lifting the server siege...
+Transactions:		       85938 hits
+Availability:		      100.00 %
+Elapsed time:		       59.73 secs
+Data transferred:	        7.04 MB
+Response time:		        0.01 secs
+Transaction rate:	     1438.77 trans/sec
+Throughput:		        0.12 MB/sec
+Concurrency:		        9.96
+Successful transactions:       85938
+Failed transactions:	           2
+Longest transaction:	        3.07
+Shortest transaction:	        0.00
+
+
+а это вывод siege с запушеным балансировшиком и server1 и server2
+** SIEGE 4.0.4
+** Preparing 10 concurrent users for battle.
+The server is now under siege...
+Lifting the server siege...
+Transactions:		       92160 hits
+Availability:		      100.00 %
+Elapsed time:		       59.18 secs
+Data transferred:	        7.56 MB
+Response time:		        0.01 secs
+Transaction rate:	     1557.28 trans/sec
+Throughput:		        0.13 MB/sec
+Concurrency:		        9.96
+Successful transactions:       92160
+Failed transactions:	           0
+Longest transaction:	        0.02
+Shortest transaction:	        0.00
+
+
+как видно из вывода один блансировшик, без серверов не работает
