@@ -1,0 +1,150 @@
+# пришлось перейти на оs хоста, потому что вотэта красота "ws://localhost:8080"
+# никак в vagrant не пробрасывалась, а очень хотелось попробовать ratchet из окон
+# браузеров, а не терминалов ...
+
+~/dev/hlapp.local >>> uname -a                                                                       ±[●●●][hw7]
+Linux alsur 5.8.6-1-MANJARO #1 SMP PREEMPT Thu Sep 3 14:19:36 UTC 2020 x86_64 GNU/Linux
+
+~/dev/hlapp.local >>> sudo pamac install rabbitmq --no-confirm                                       ±[●●●][hw7]
+Подготовка...
+Синхронизация баз данных пакетов...
+Разрешение зависимостей...
+Проверка на взаимные конфликты...
+К установке (3):
+  rabbitmq    3.8.7-1                               community  14,9 MB
+  socat       1.7.3.4-2  (Требуется для: rabbitmq)  extra      187,3 kB
+  erlang-nox  23.0.3-1   (Требуется для: rabbitmq)  community  40,8 MB
+
+Общий размер загрузки: 55,9 MB
+Общий размер установленного: 120,3 MB
+Загрузка socat (1.7.3.4-2) закончилась                                                                           
+Загрузка rabbitmq (3.8.7-1) началась                                                                             
+Загрузка rabbitmq (3.8.7-1) закончилась                                                                          
+Загрузка erlang-nox (23.0.3-1) закончилась                                                                       
+Проверка связки ключей...                                                                                   [3/3]
+Проверка целостности...                                                                                     [3/3]
+Загрузка файлов пакетов...                                                                                  [3/3]
+Проверка файлов на конфликты ...                                                                            [3/3]
+Проверка доступного дискового пространства...                                                               [3/3]
+Установка erlang-nox (23.0.3-1)...                                                                          [1/3]
+Установка socat (1.7.3.4-2)...                                                                              [2/3]
+Установка rabbitmq (3.8.7-1)...                                                                             [3/3]
+Работа обработчиков post-transaction...
+Creating system user accounts...                                                                            [1/4]
+Creating group rabbitmq with gid 197.
+Creating user rabbitmq (RabbitMQ user) with uid 197 and gid 197.
+Reloading system manager configuration...                                                                   [2/4]
+Creating temporary files...                                                                                 [3/4]
+Arming ConditionNeedsUpdate...                                                                              [4/4]
+Транзакция успешно завершена.
+
+~/dev/hlapp.local >>> sudo systemctl start rabbitmq                                                  ±[●●●][hw7]
+~/dev/hlapp.local >>> sudo systemctl status rabbitmq                                                 ±[●●●][hw7]
+● rabbitmq.service - RabbitMQ broker
+     Loaded: loaded (/usr/lib/systemd/system/rabbitmq.service; disabled; vendor preset: disabled)
+     Active: active (running) since Thu 2020-09-10 08:31:18 +07; 3s ago
+   Main PID: 51870 (beam.smp)
+     Status: "Initialized"
+      Tasks: 163 (limit: 19106)
+     Memory: 101.2M
+     CGroup: /system.slice/rabbitmq.service
+             ├─51870 /usr/lib/erlang/erts-11.0.3/bin/beam.smp -W w -K true -A 128 -MBas ageffcbf -MHas ageffcbf >
+             ├─52048 erl_child_setup 1024
+             ├─52086 /usr/lib/erlang/erts-11.0.3/bin/epmd -daemon
+             ├─52121 inet_gethost 4
+             └─52122 inet_gethost 4   
+
+~/dev/hlapp.local >>> sudo rabbitmq-plugins enable rabbitmq_management                               ±[●●●][hw7]
+[sudo] пароль для rusla: 
+Enabling plugins on node rabbit@alsur:
+rabbitmq_management
+The following plugins have been configured:
+  rabbitmq_management
+  rabbitmq_management_agent
+  rabbitmq_web_dispatch
+Applying plugin configuration to rabbit@alsur...
+The following plugins have been enabled:
+  rabbitmq_management
+  rabbitmq_management_agent
+  rabbitmq_web_dispatch
+
+started 3 plugins.
+
+~/dev/hlapp.local >>> sudo systemctl restart rabbitmq
+
+~/dev/hlapp.local >>> pamac build php-amqp --no-confirm                                              ±[●●●][hw7]
+Подготовка...
+Клонирование сборочных файлов php-amqp...
+Проверка зависимостей для php-amqp...
+Разрешение зависимостей...
+Проверка на взаимные конфликты...
+К установке (1):
+  librabbitmq-c  0.10.0-1  (Требуется для: php-amqp)  community  79,9 kB
+К сборке (1):
+  php-amqp       1.10.2-1                             AUR
+
+Общий размер загрузки: 79,9 kB
+Общий размер установленного: 374,3 kB
+
+Build complete.
+Don't forget to run 'make test'.
+
+==> Вход в окружение fakeroot...
+==> Запускается package()...
+==> Очистка...
+  -> Удаление файлов libtool...
+  -> Удаление ненужных файлов...
+  -> Удаление статических библиотек...
+  -> Удаление отладочной информации из бинарников и библиотек...
+  -> Сжатие документации (man и info)...
+==> Проверка сборки на ошибки...
+==> Создание пакета "php-amqp"...
+  -> Создание файла '.PKGINFO'...
+  -> Создание файла '.BUILDINFO'...
+  -> Создание файла '.MTREE'...
+  -> Сжатие пакета...
+==> Выход из окружения fakeroot.
+==> Завершена сборка пакета php-amqp 1.10.2-1 (Чт 10 сен 2020 09:30:07)
+==> Очистка...
+
+Проверка связки ключей...                                                                                   [1/1]
+Проверка целостности...                                                                                     [1/1]
+Загрузка файлов пакетов...                                                                                  [1/1]
+Проверка файлов на конфликты ...                                                                            [1/1]
+Проверка доступного дискового пространства...                                                               [1/1]
+Установка php-amqp (1.10.2-1)...                                                                            [1/1]
+Транзакция успешно завершена.
+
+~/dev/hlapp.local >>> sudo systemctl restart php-fpm
+
+~/dev/hlapp.local >>> composer require php-amqplib/php-amqplib
+Using version ^2.12 for php-amqplib/php-amqplib
+./composer.json has been updated
+Loading composer repositories with package information
+Updating dependencies (including require-dev)
+Package operations: 2 installs, 0 updates, 0 removals
+  - Installing phpseclib/phpseclib (2.0.29): Downloading (100%)         
+  - Installing php-amqplib/php-amqplib (v2.12.0): Downloading (100%)         
+phpseclib/phpseclib suggests installing ext-libsodium (SSH2/SFTP can make use of some algorithms provided by the libsodium-php extension.)
+phpseclib/phpseclib suggests installing ext-mcrypt (Install the Mcrypt extension in order to speed up a few other cryptographic operations.)
+phpseclib/phpseclib suggests installing ext-gmp (Install the GMP (GNU Multiple Precision) extension in order to speed up arbitrary precision integer arithmetic operations.)
+Writing lock file
+Generating autoload files
+7 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+
+~/dev/hlapp.local >>> sudo rabbitmqctl list_queues                                                   ±[●●●][hw7]
+[sudo] пароль для rusla: 
+Timeout: 60.0 seconds ...
+Listing queues for vhost / ...
+name	messages
+queue1	12
+queue2	6
+
+~/dev/hlapp.local >>> sh ./startRabbittReceiver.sh                                                      ±[●●●][hw7]
+nohup: вывод добавляется в 'nohup.out'
+
+~/dev/hlapp.local >>> sh ./startRabbittSender.sh                                                     ±[●●●][hw7]
+nohup: вывод добавляется в 'nohup.out'
+
+# файл 'nohup.out' помешен п папку hw7_logs
