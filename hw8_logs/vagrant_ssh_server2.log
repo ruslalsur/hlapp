@@ -1,0 +1,18 @@
+vagrant@server2:~/dev/app1$ wget https://repo.zabbix.com/zabbix/5.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_5.0-1+focal_all.deb
+
+vagrant@server2:~/dev/app1$ sudo dpkg -i zabbix-release_5.0-1+focal_all.deb
+Selecting previously unselected package zabbix-release.
+(Reading database ... 62771 files and directories currently installed.)
+Preparing to unpack zabbix-release_5.0-1+focal_all.deb ...
+Unpacking zabbix-release (1:5.0-1+focal) ...
+Setting up zabbix-release (1:5.0-1+focal) ...
+
+vagrant@server2:~/dev/app1$ sudo apt update
+vagrant@server2:~/dev/app1$ sudo apt install zabbix-agent
+vagrant@server2:~/dev/app1$ sudo nano /etc/zabbix/zabbix_agentd.conf (отрдактированный файл прилагается)
+vagrant@server2:~/dev/app1$ sudo systemctl restart zabbix-agent
+
+
+
+
+

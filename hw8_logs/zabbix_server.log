@@ -1,0 +1,54 @@
+ 8323:20200913:080750.861 Starting Zabbix Server. Zabbix 5.0.3 (revision 146855bff3).
+  8323:20200913:080750.862 ****** Enabled features ******
+  8323:20200913:080750.862 SNMP monitoring:           YES
+  8323:20200913:080750.862 IPMI monitoring:           YES
+  8323:20200913:080750.862 Web monitoring:            YES
+  8323:20200913:080750.862 VMware monitoring:         YES
+  8323:20200913:080750.862 SMTP authentication:       YES
+  8323:20200913:080750.862 ODBC:                      YES
+  8323:20200913:080750.862 SSH support:               YES
+  8323:20200913:080750.862 IPv6 support:              YES
+  8323:20200913:080750.862 TLS support:               YES
+  8323:20200913:080750.862 ******************************
+  8323:20200913:080750.862 using configuration file: /etc/zabbix/zabbix_server.conf
+  8323:20200913:080750.879 current database version (mandatory/optional): 05000000/05000002
+  8323:20200913:080750.879 required mandatory version: 05000000
+  8323:20200913:080750.895 server #0 started [main process]
+  8326:20200913:080750.895 server #1 started [configuration syncer #1]
+  8346:20200913:080751.011 server #8 started [history syncer #3]
+  8347:20200913:080751.011 server #9 started [history syncer #4]
+  8351:20200913:080751.011 server #13 started [task manager #1]
+  8348:20200913:080751.011 server #10 started [escalator #1]
+  8349:20200913:080751.012 server #11 started [proxy poller #1]
+  8350:20200913:080751.012 server #12 started [self-monitoring #1]
+  8352:20200913:080751.012 server #14 started [poller #1]
+  8345:20200913:080751.013 server #7 started [history syncer #2]
+  8344:20200913:080751.013 server #6 started [history syncer #1]
+  8343:20200913:080751.014 server #5 started [discoverer #1]
+  8354:20200913:080751.015 server #16 started [poller #3]
+  8353:20200913:080751.016 server #15 started [poller #2]
+  8342:20200913:080751.016 server #4 started [http poller #1]
+  8341:20200913:080751.018 server #3 started [timer #1]
+  8355:20200913:080751.019 server #17 started [poller #4]
+  8356:20200913:080751.021 server #18 started [poller #5]
+  8340:20200913:080751.024 server #2 started [housekeeper #1]
+  8357:20200913:080751.025 server #19 started [unreachable poller #1]
+  8358:20200913:080751.030 server #20 started [trapper #1]
+  8359:20200913:080751.031 server #21 started [trapper #2]
+  8360:20200913:080751.043 server #22 started [trapper #3]
+  8361:20200913:080751.047 server #23 started [trapper #4]
+  8362:20200913:080751.054 server #24 started [trapper #5]
+  8363:20200913:080751.060 server #25 started [icmp pinger #1]
+  8364:20200913:080751.065 server #26 started [alert manager #1]
+  8365:20200913:080751.066 server #27 started [alerter #1]
+  8366:20200913:080751.066 server #28 started [alerter #2]
+  8388:20200913:080751.072 server #29 started [alerter #3]
+  8389:20200913:080751.072 server #30 started [preprocessing manager #1]
+  8390:20200913:080751.073 server #31 started [preprocessing worker #1]
+  11785:20200913:142201.594 executing housekeeper
+ 11785:20200913:142201.600 housekeeper [deleted 0 hist/trends, 0 items/triggers, 0 events, 0 problems, 0 sessions, 0 alarms, 0 audit, 0 records in 0.005092 sec, idle for 1 hour(s)]
+ 11792:20200913:142350.367 item "server2:vfs.dev.read.await[sda]" became not supported: Cannot evaluate expression: "Cannot evaluate function "last()": not enough data.".
+ 11789:20200913:142351.368 item "server2:vfs.dev.write.await[sda]" became not supported: Cannot evaluate expression: "Cannot evaluate function "last()": not enough data.".
+ 11791:20200913:142650.543 item "server2:vfs.dev.read.await[sda]" became supported
+ 11790:20200913:142651.544 item "server2:vfs.dev.write.await[sda]" became supported
+ 11798:20200913:144004.140 enabling Zabbix agent checks on host "server2": host became available
